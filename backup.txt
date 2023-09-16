@@ -1,0 +1,140 @@
+Trial 1 - Original
+
+Script.js
+
+/* Code for index.html Part 1 original*/
+    /*let timerInterval;
+
+    if (startButton && exitButton) {
+        startButton.addEventListener("click", () => {
+            fetch("/start_timer");
+            timerInterval = setInterval(updateTimer, 975);
+        });
+
+        exitButton.addEventListener("click", () => {
+            clearInterval(timerInterval);
+            fetch("/stop_timer");
+        });
+
+        
+        function updateTimer() {
+            fetch("/get_timer")
+                .then(response => response.text())
+                .then(timer => {
+                    timerElement.innerText = `Time passed: ${timer} typebits`;
+                });
+        }
+    
+        
+    }
+    */
+
+
+app.py
+
+"""Part 1 Original
+@app.route('/start_timer')
+def start_timer_route():
+    global timer_running, timer
+    timer_running = True
+    timer = 0
+    timer_thread = Thread(target=start_timer)
+    timer_thread.start()
+    return "Timer started."
+
+@app.route('/get_timer')
+def get_timer():
+    global timer
+    return str(timer)
+
+@app.route('/stop_timer')
+def stop_timer():
+    global timer_running
+    timer_running = False
+    return "Timer stopped."
+
+def start_timer():
+    global timer_running, timer
+    while timer_running:
+        if any(keyboard.is_pressed(key) for key in letter_keys):
+            timer += 1
+            time.sleep(0.975)
+
+"""
+
+
+
+Trial 2 - Trial 2
+
+Script.js
+
+/*Part 2*/
+/*
+let timerInterval;
+let socket;
+
+if (startButton && exitButton) {
+    startButton.addEventListener("click", () => {
+        socket = new WebSocket("ws://127.0.0.1:5000/index"); // Establish WebSocket connection
+        socket.onopen = () => {
+            socket.send("start_timer"); // Send a message to start the timer
+        };
+        socket.onmessage = (event) => {
+            timerElement.innerText = `Time passed: ${event.data} typebits`; // Update the timer with the received data
+        };
+        timerInterval = setInterval(updateTimer, 975);
+    });
+
+    exitButton.addEventListener("click", () => {
+        socket.close();
+    });
+
+    function updateTimer(timer) {
+        timerElement.innerText = `Time passed: ${timer} typebits`;
+    }
+}
+*/
+
+
+
+
+app.py
+
+""" Part  2 """
+"""
+@sockets.route('/index')  # WebSocket route
+def ws_route(ws):
+    while not ws.closed:
+        message = ws.receive()  # Receive incoming WebSocket message
+        if message == 'start_timer':
+            start_timer()
+        elif message == 'stop_timer':
+            stop_timer()
+
+def start_timer():
+    global timer_running, timer
+    while timer_running:
+        if any(keyboard.is_pressed(key) for key in letter_keys):
+            timer += 1
+            time.sleep(0.975)
+
+def stop_timer():
+    global timer_running, timer
+    timer_running = False
+    timer = 0
+    return "Timer stopped."
+"""
+
+
+Sockets Attempt
+
+app = Flask(__name__, static_url_path='/static')
+"""sockets = Sockets(app)"""
+socketio = SocketIO(app)
+
+"""
+@app.after_request
+def add_cache_control(response):
+    response.headers['Cache-Control'] = 'no-cache'
+    return response
+"""
