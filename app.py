@@ -6,6 +6,7 @@ from threading import Thread
 from flask_sockets import Sockets
 
 from flask_socketio import SocketIO, emit
+from datetime import datetime, timedelta
 
 #========================
 import firebase_admin
@@ -83,8 +84,6 @@ letter_keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 
 
 #Define the retrival and saving of points
 
-
-
 timer_running = False
 timer = 0
 savedtime = 0
@@ -94,28 +93,51 @@ uid = 'XXX'
 def retrieve_points():
     global uid
     uid = request.args.get('uid')  # Get user_id from request
+
+    # Check if the user document exists
     user_ref = db.collection('users').document(uid)
     doc = user_ref.get()
 
     global timer
 
     if doc.exists:
-        points = doc.to_dict().get('points')
+        # User document exists, check if dailyPoints subcollection exists
+        print("main document exists")
+
+        daily_points_ref = user_ref.collection('dailyPoints')
         
-        timer = points
-        
-        print("retrieved points: " + str(timer))
-        return jsonify({'points': points}), 200
+        current_date = datetime.now().strftime('%Y-%m-%d')
+
+        daily_doc = daily_points_ref.document(current_date).get()
+
+        if daily_doc.exists:
+            
+            # If points for the specified date exist, return them
+            points = daily_doc.to_dict().get('points')
+            print("daily document exists, retrieved points: " + str(points))
+            timer = points
+        else:
+            # Points for the specified date don't exist, set points to 0
+            timer = 0
+            daily_points_ref.document(current_date).set({'points': 0})
     else:
         # User not found, create a new user document with some initial data
         initial_data = {
             'points': 0,  # You can initialize points to any default value
             # Add other user data as needed
-        } 
-        timer = 0
+        }
         user_ref.set(initial_data)
-        print("retrieved (and set) points: " + str(timer));
-        return jsonify({'points': 0}), 200  # Return the initial data for the new user
+        
+         # Also set points to 0 for today's date
+        daily_points_ref = user_ref.collection('dailyPoints').document(current_date)
+        daily_points_ref.set({'points': 0})
+        timer = 0
+
+    return jsonify({'points': timer}), 200
+
+
+
+
 
 
 
@@ -132,6 +154,11 @@ def login():
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
+
+@app.route('/statistics')
+def statistics():
+    stop_timer()
+    return render_template('statistics.html')
 
 
 # Start timer function (modify as needed)
@@ -171,8 +198,6 @@ def start_timer_route():
     timer_thread.start()
     return "Timer started."
 
-
-
 @app.route('/stop_timer')
 def stop_timer():
     global timer_running
@@ -180,19 +205,27 @@ def stop_timer():
     print("timer stopped")
     timer_running = False
     global timer
- 
+
     global uid
     print("Stop timer uid = " + str(uid))
     if uid != 'XXX':
+        # Get the current date in 'YYYY-MM-DD' format
+        current_date = datetime.now().strftime('%Y-%m-%d')
+        
         user_ref = db.collection('users').document(uid)
-        user_ref.set({'points': timer}, merge=True)  # Merge is used to update existing points
+        daily_points_ref = user_ref.collection('dailyPoints').document(current_date)
+        
+        # Update the points for today's date
+        daily_points_ref.set({'points': timer}, merge=True)  # Merge is used to update existing points
         savedtime = timer
-    
+
     return "Timer stopped."
+    
 
 
 @app.route('/logout_timer')
 def logout_timer():
+    stop_timer()
     global timer_running
     global timer
     global uid
@@ -200,29 +233,70 @@ def logout_timer():
     timer = 0
     uid = 'XXX'
     timer_running = False
+
  
     return "Logout Timer stopped."
 
 
+@app.route('/get_daily_stats10', methods=['GET'])
+def get_daily_stats10():
+    global uid
+    uid = request.args.get('uid')  # Get user_id from request
+
+    if not uid:
+        return jsonify({"error": "uid not provided"})
+
+    # Check if the user document exists
+    user_ref = db.collection('users').document(uid)
+    doc = user_ref.get()
 
 
+    if doc.exists:
+        # User document exists, check if dailyPoints subcollection exists
+        print("main document exists")
 
-
-
-"""
-@app.route('/save_points', methods=['POST'])
-def save_points():
-    user_id = request.json.get('user_id')  # Get user_id from JSON request
-    new_points = request.json.get('new_points')  # Get new_points from JSON request
-    
-    if user_id and new_points is not None:
-        user_ref = db.collection('users').document(user_id)
-        user_ref.set({'points': new_points}, merge=True)  # Merge is used to update existing points
+        daily_points_ref = user_ref.collection('dailyPoints')
         
-        return jsonify({'message': 'Points saved successfully'}), 200
-    else:
-        return jsonify({'error': 'Invalid data'}), 400
-"""
+        current_date_1 = datetime.now()
+        current_date = datetime.now().strftime('%Y-%m-%d')
+        # Create an empty list to store the previous 10 days
+
+        previous_10_days = []
+        previous_10_days_points = []
+        
+        # Use a loop to calculate the previous 10 days and format them
+        for i in range(0, 10):
+            previous_date = current_date_1 - timedelta(days=i)
+
+            print("===============previous_date is " + str(previous_date))
+
+            formatted_date = previous_date.strftime('%Y-%m-%d')
+            #previous_10_days_points.append(formatted_date)
+
+            daily_doc = daily_points_ref.document(formatted_date).get()
+
+            if daily_doc.exists:
+            
+            # If points for the specified date exist, return them
+                statsPoints = daily_doc.to_dict().get('points')
+                
+                previous_10_days.insert(0, formatted_date)
+                previous_10_days_points.insert(0, statsPoints)
+                
+             
+                
+            else:
+            # Points for the specified date don't exist, set points to 0
+                
+                previous_10_days.insert(0, formatted_date)
+                previous_10_days_points.insert(0, 0)
+                daily_points_ref.document(formatted_date).set({'points': 0})
+
+        print(previous_10_days)
+        print(previous_10_days_points)
+
+    return jsonify({"previous_10_days": previous_10_days, "previous_10_days_points": previous_10_days_points})
+
 
 
 

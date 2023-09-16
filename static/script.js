@@ -12,6 +12,25 @@ const loginButtonContainer = document.getElementById("login-button-container");
     const userEmail = sessionStorage.getItem("userEmail");
 
     if (userEmail) {
+        //===============
+
+        // Create and append the login button
+        const loginButton = document.createElement("a");
+        loginButton.classList.add("nav-link");
+        loginButton.href = "/statistics";
+        loginButton.textContent = "Statistics";
+        loginButtonContainer.appendChild(loginButton);
+
+        // Create and append the sign-up button
+        const signupButton = document.createElement("a");
+        signupButton.classList.add("nav-link");
+        signupButton.href = "/deleteAcc";
+        signupButton.textContent = "Delete Account";
+        signupButtonContainer.appendChild(signupButton);
+
+
+        //=========================
+
 
         const emailDisplayContainer = document.getElementById("email-display-container");
         if (emailDisplayContainer) {

@@ -138,3 +138,52 @@ def add_cache_control(response):
     response.headers['Cache-Control'] = 'no-cache'
     return response
 """
+
+
+
+Retrieve points Ex:
+"""
+@app.route('/retrieve_points', methods=['GET'])
+def retrieve_points():
+    global uid
+    uid = request.args.get('uid')  # Get user_id from request
+    user_ref = db.collection('users').document(uid)
+    doc = user_ref.get()
+
+    global timer
+
+    if doc.exists:
+        points = doc.to_dict().get('points')
+        
+        timer = points
+        
+        print("retrieved points: " + str(timer))
+        return jsonify({'points': points}), 200
+    else:
+        # User not found, create a new user document with some initial data
+        initial_data = {
+            'points': 0,  # You can initialize points to any default value
+            # Add other user data as needed
+        } 
+        timer = 0
+        user_ref.set(initial_data)
+        print("retrieved (and set) points: " + str(timer));
+        return jsonify({'points': 0}), 200  # Return the initial data for the new user
+"""
+
+
+Save points Ex:
+"""
+@app.route('/save_points', methods=['POST'])
+def save_points():
+    user_id = request.json.get('user_id')  # Get user_id from JSON request
+    new_points = request.json.get('new_points')  # Get new_points from JSON request
+    
+    if user_id and new_points is not None:
+        user_ref = db.collection('users').document(user_id)
+        user_ref.set({'points': new_points}, merge=True)  # Merge is used to update existing points
+        
+        return jsonify({'message': 'Points saved successfully'}), 200
+    else:
+        return jsonify({'error': 'Invalid data'}), 400
+"""
