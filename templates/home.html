@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <!-- Add Bootstrap CSS from a CDN -->
+    <link rel="stylesheet" href="../static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script> <!---by mattboldt github-->
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Galaxy Type</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" id="login-button-container">
+                        <!-- Placeholder for the login button -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index">Timer</a>
+                    </li> 
+                    <li class="nav-item" id="logout-button-container">
+                        <!-- Placeholder for the logout button -->
+                    </li>
+                    <li class="nav-item" id="signup-button-container">
+                        <!-- Placeholder for the sign-up button -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!-- Clickable SVG at the top right -->
+<a href="#" class="clickable-svg">
+    <svg id="showModalSvg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+        class="bi bi-question-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path
+            d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+    </svg>
+</a>
+
+<!--Word Pic Animation -->
+<div class="text-container">
+    
+
+    <div class="row containerE">
+        <div>
+            <h1>Galaxy Type</h1>
+        </div>
+
+        <div class="typing-animation text-center">
+            <h2 class="mb-1 text-white">Travel to <span class="auto-type spanE"></span></h2>
+        </div>
+    
+        <!-- "Get Started" button centered at the bottom -->
+        <div class="text-center mt-3">
+            <br>
+            <br>
+          
+            <a href="#" class="btn btn-primary btn-lg glowing-started-button" data-bs-toggle="modal" data-bs-target="#authModal">Get Started</a>
+        </div>
+    
+    </div>
+
+
+</div>
+
+  
+
+
+<!-- Typing Animation -->
+<!---
+<section>
+    <div class="container-fluid containerE">
+
+    <div class="row">
+
+    <div class="typing-animation">
+        <h1 class="mb-1">This is a <span class="auto-type spanE"></span></h1>
+    </div>
+
+ 
+    <div class="text-center mt-3">
+        <br>
+        <br>
+        <a href="#" class="btn btn-primary btn-lg glowing-started-button">Get Started</a>
+    </div>
+
+</div>
+--->
+
+
+</div>
+</section>
+
+<!---
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1>Login</h1>
+                <form>
+                    <div class="mb-3">
+                        <label for="login-email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="login-email" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="login-password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="login-password" placeholder="Enter your password">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="loginbutton">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+---->
+
+<!--Modal Sign in-->
+
+<!-- Modal -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="authModalLabel">Authentication</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" id="authTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="signup-tab" data-bs-toggle="tab" href="#signup" role="tab" aria-controls="signup" aria-selected="false">Sign Up</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content" id="authTabContent">
+                    <!-- Login Tab -->
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        <!-- Login Form -->
+                        <form>
+                            <div class="mb-3">
+                                <label for="login-email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="login-email" placeholder="Enter your email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="login-password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="login-password" placeholder="Enter your password">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="loginbutton">Login</button>
+                        </form>
+                    </div>
+                    <!-- Sign Up Tab -->
+                    <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                        <!-- Sign Up Form -->
+                        <form>
+                    
+                            <div class="mb-3">
+                                <label for="signup-email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="signup-email" placeholder="Enter your email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="signup-password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="signup-password" placeholder="Enter your password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm-password" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm your password">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="signupbutton">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Question-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Welcome</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Content for your modal goes here -->
+                Welcome to Type Warriors, a platform to become the best typer! Say goodbye to your imposter syndome
+                by making your progress tangible! Earn typebits by typing, and track your progress!
+
+
+                At the end of everyday, your progress will be reset.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Add Bootstrap JavaScript and Popper.js from CDNs -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='scriptTypeAnimation.js') }}"></script>
+
+</body>
+</html>

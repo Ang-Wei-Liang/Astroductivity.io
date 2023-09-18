@@ -21,3 +21,136 @@ button {
     border: none;
     cursor: pointer;
 }
+
+
+/* Style for the clickable SVG */
+.clickable-svg {
+    position: absolute;
+    top: 65px;
+    /* Adjust the distance from the top as needed */
+    right: 65px;
+    /* Adjust the distance from the right as needed */
+    cursor: pointer;
+}
+
+.glowing-started-button {
+    animation: yellow-glow 7s infinite alternate; /* Adjust the animation duration as needed */
+}
+
+
+@keyframes yellow-glow {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5); /* Yellow glow */
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 0, 0.9), 0 0 50px rgba(255, 255, 0, 0.6), 0 0 70px rgba(255, 255, 0, 0.4); /* Yellow glow */
+        transform: scale(1.02);
+    }
+
+    100% {
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5); /* Yellow glow */
+        transform: scale(1);
+    }
+}
+
+
+/*Projects*/
+/*
+.containerE {
+    width: 100%;
+    height: 90vh;
+    
+    background-image: url('images/PatrickFore_Typewriter.jpg'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}*/
+
+.containerE h2 {
+   font-size: 80px;
+   font-weight: 600;
+   text-decoration: none;
+   /*margin-bottom: 500px; /* Adjust the value as needed */
+}
+
+.spanE{                     /*Typing Animation*/
+    color: yellow;
+}
+
+
+/*Word Pic Animation*/
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+    /*background-color: #000;*/
+}
+  
+
+  
+
+  
+  .text-container {
+    /*Photo by <a href="https://unsplash.com/@steve_j?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Steve Johnson</a> on <a href="https://unsplash.com/photos/QFqpeY0r-IU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>*/
+    
+    
+    
+    background-image: url("../static/images/Galaxy2.jpg");
+    background-size: cover; /* Adjust background size as needed */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    background-position: center center; /* Center the image */
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .text-container h1{
+    margin: 0;
+    font-size: 150px;
+    color: rgba(225,225,225, .01);
+    background-image: url('../static/images/PaintSteve.jpg');
+    background-repeat: repeat;
+    background-position: center center; /* Center the image */
+
+
+    /*
+    Photo by <a href="https://unsplash.com/@jay_zhang?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jay Zhang</a> on <a href="https://unsplash.com/photos/ZRoC_96HPnw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+    */
+    
+
+    -webkit-background-clip:text;
+    background-clip: text;
+    color: transparent; /* Make the text transparent to reveal the background */
+
+    
+   
+
+    animation: animate2 15s ease-in-out infinite;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+  
+    @keyframes animate2 {
+      0%, 100% {
+        background-position: left top;
+      }
+      25%{
+        background-position: right bottom;
+       }
+      50% {
+        background-position: left bottom;
+      }
+      75% {
+        background-position: right top;
+      }   
+  }
+

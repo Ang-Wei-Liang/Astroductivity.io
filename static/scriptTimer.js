@@ -2,6 +2,9 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
+    
+
+
 
 const userEmail = sessionStorage.getItem("userEmail");
 
@@ -46,7 +49,8 @@ function retrievePoints() {
           console.log(`User's points: ${data.points}`);
           // Update the UI to display the user's points
           // Example: document.getElementById("points-display").textContent = data.points;
-          timerElement.innerText = `You currently have: ${data.points} typebits today, press start to begin`;
+          //timerElement.innerText = `You currently have: ${data.points} typebits today, press start to begin`;
+          timerElement.innerText = `${data.points}`;
         } else {
           console.error("Error retrieving points:", data.error);
         }
@@ -61,7 +65,7 @@ function retrievePoints() {
 if (userEmail){
 retrievePoints()
 } else {
-    timerElement.innerText = `Press start to begin/continue. You are not logged in` 
+    timerElement.innerText = `Press Start` 
 }
 
 
@@ -86,7 +90,8 @@ const socket = io.connect('http://127.0.0.1:5000/');
 
 socket.on('timer_update', function(data) {
     console.log("Timer should be shown is " + data.timer);
-    timerElement.innerText = `${data.timer} typebits gathered today`;
+    timerElement.innerText = `${data.timer}`;
+    //typebits gathered today
 });
 
 
