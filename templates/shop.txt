@@ -1,0 +1,233 @@
+<!-- Shop Section -->
+    <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4 m-">
+            <!-- Product Card 1 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="/static/images/planets/moon-Eugene.png" class="card-img-top fixed-image p-5" alt="Product 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Moon</h5>
+                        <p class="card-text">The moon, Earth's celestial companion, is a captivating marvel of our night sky. What sets it apart is not just its hauntingly beautiful silver glow, but its profound influence on our planet. As the closest cosmic neighbor, the moon dictates the ebb and flow of our oceans, orchestrates the dance of tides, and provides a celestial canvas for dreamers and poets alike.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 0 Typebits</p>
+                        <a href="#" class="btn btn-secondary">Owned</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product2.jpg" class="card-img-top" alt="Product 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Mercury</h5>
+                        <p class="card-text">Mercury, the scorched messenger of the Sun, is a world of extremes—its surface, blasted by relentless solar radiation, boasts the hottest days and the coldest nights in our solar system. Its fleeting dance around the Sun, the fastest of all planets, reveals a dynamic beauty amidst a harsh and unforgiving terrain.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 200 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product3.jpg" class="card-img-top fixed-image" alt="Product 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Earth</h5>
+                        <p class="card-text">Earth, our blue jewel in the cosmos, stands as the only known oasis of life in the vast expanse of the universe—a sanctuary where breathtaking landscapes and diverse ecosystems intertwine, nurturing the tapestry of existence.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">200 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product4.jpg" class="card-img-top" alt="Product 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Venus</h5>
+                        <p class="card-text">Description of Product 4.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 500 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 5 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product5.jpg" class="card-img-top" alt="Product 5">
+                    <div class="card-body">
+                        <h5 class="card-title">Mars</h5>
+                        <p class="card-text">Description of Product 5.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 500 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 6 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product6.jpg" class="card-img-top" alt="Product 6">
+                    <div class="card-body">
+                        <h5 class="card-title">Juptier</h5>
+                        <p class="card-text">Description of Product 6.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 1000 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 7 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product7.jpg" class="card-img-top" alt="Product 7">
+                    <div class="card-body">
+                        <h5 class="card-title">Saturn</h5>
+                        <p class="card-text">Description of Product 7.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 1000 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 8 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product8.jpg" class="card-img-top" alt="Product 8">
+                    <div class="card-body">
+                        <h5 class="card-title">Uranus</h5>
+                        <p class="card-text">Description of Product 8.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 2000 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 8 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product8.jpg" class="card-img-top" alt="Product 8">
+                    <div class="card-body">
+                        <h5 class="card-title">Neptune</h5>
+                        <p class="card-text">Description of Product 8.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 2000 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 8 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product8.jpg" class="card-img-top" alt="Product 8">
+                    <div class="card-body">
+                        <h5 class="card-title">Pluto</h5>
+                        <p class="card-text">Description of Product 8.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 5000 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 8 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product8.jpg" class="card-img-top" alt="Product 8">
+                    <div class="card-body">
+                        <h5 class="card-title">Proxima Centauri b</h5>
+                        <p class="card-text">Description of Product 8.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 10000 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 8 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product8.jpg" class="card-img-top" alt="Product 8">
+                    <div class="card-body">
+                        <h5 class="card-title">55 Cancri e</h5>
+                        <p class="card-text">Description of Product 8.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 20000 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 8 -->
+            <div class="col">
+                <div class="card m-3">
+                    <img src="product8.jpg" class="card-img-top" alt="Product 8">
+                    <div class="card-body">
+                        <h5 class="card-title">Sun</h5>
+                        <p class="card-text">Description of Product 8.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: 50000 Typebits</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    //====================================
+
+    if (data.planetArr !== undefined) {
+                    console.log(`User's planet array retrieved, it is ` + planetArr);
+
+                    planetArr = data.planetArr
+
+                    if (planetArr.includes("Moon")) {
+                        moonButton.classList.add('disabled');
+                        document.getElementById('moonBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Mercury")) {
+                        mercuryButton.classList.add('disabled');
+                        document.getElementById('mercuryBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Earth")) {
+                        earthButton.classList.add('disabled');
+                        document.getElementById('earthBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Venus")) {
+                        venusButton.classList.add('disabled');
+                        document.getElementById('venusBuyStatus').textContent = "Owned"             
+                    }
+
+                    const moonButton = document.getElementById('moonButton');
+    const mercuryButton = document.getElementById('mercuryButton');
+    const earthButton = document.getElementById('earthButton');
+    const venusButton = document.getElementById('venusButton');

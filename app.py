@@ -89,6 +89,9 @@ timer = 0
 savedtime = 0
 uid = 'XXX'
 
+timerSum = 0
+startTimer = 0
+
 """
 @app.route('/deleteAcc', methods=['GET'])
 def delete_Account():
@@ -173,6 +176,7 @@ def retrieve_points():
     doc = user_ref.get()
 
     global timer
+    global timerSum
 
     current_date = datetime.now().strftime('%Y-%m-%d')
 
@@ -182,9 +186,17 @@ def retrieve_points():
 
         daily_points_ref = user_ref.collection('dailyPoints')
         
-        
-
         daily_doc = daily_points_ref.document(current_date).get()
+
+
+        # Getting total points
+        user_data = doc.to_dict()
+        totalPoints = user_data.get('points', 0)  # Default to 0 if 'points' field doesn't exist
+
+        print("Total points0 is: " + str(totalPoints))
+        timerSum = totalPoints
+
+        print("Total points is (timerSum): " + str(timerSum))
 
         if daily_doc.exists:
             
@@ -202,6 +214,7 @@ def retrieve_points():
         initial_data = {
             'points': 0,  # You can initialize points to any default value
             # Add other user data as needed
+            'planet': ["Moon"],
         }
         user_ref.set(initial_data)
         
@@ -212,8 +225,45 @@ def retrieve_points():
         daily_points_ref = user_ref.collection('dailyPoints').document(current_date)
         daily_points_ref.set({'points': 0}, merge=True)
         timer = 0
+        timerSum = 0
 
-    return jsonify({'points': timer}), 200
+    return jsonify({'points': timer, 'totalpoints':timerSum}), 200
+
+
+
+
+@app.route('/retrieve_button_status', methods=['GET'])
+def retrieve_button_status():
+    global uid
+    uid = request.args.get('uid')  # Get user_id from request
+
+    # Check if the user document exists
+    user_ref = db.collection('users').document(uid)
+    doc = user_ref.get()
+
+    if doc.exists:
+        # User document exists, check if dailyPoints subcollection exists
+        print("main document exists, retrieving planet status")
+
+        # Getting total points
+        user_data = doc.to_dict()
+        planetArr = user_data.get('planet', ["Moon"])  # Default to 0 if 'points' field doesn't exist
+
+        print(planetArr)
+
+    else:
+        # User not found, create a new user document with some initial data
+        
+        initial_data = {
+            'points': 0,  # You can initialize points to any default value
+            # Add other user data as needed
+            'planet': ['Moon'],
+        }
+        user_ref.set(initial_data)
+
+        planetArr = ["Moon"]
+
+    return jsonify({'planetArr': planetArr}), 200
 
 
 
@@ -243,14 +293,18 @@ def statistics():
     return render_template('statistics.html')
 
 @app.route('/shop')
-def statistics():
+def shop():
     stop_timer()
     return render_template('shop.html')
 
-
+timerStatus = False
 # Start timer function (modify as needed)
 def start_timer():
     global timer_running, timer
+    global startTimer
+    global timerStatus 
+    timerStatus = True
+    startTimer = timer
     
     print("timer started 2")
 
@@ -292,10 +346,28 @@ def stop_timer():
     print("timer stopped")
     timer_running = False
     global timer
-
+    global startTimer
+    global timerSum
     global uid
+    global timerStatus
+
+    #timer_status_check = True
+
+    if timerStatus == False:
+        timeGained = 0
+    else:
+        timeGained = timer - startTimer
+
+    print("=========================================================")
     print("Stop timer uid = " + str(uid))
-    print("Stop timer timer is = " + str(timer))
+    print("Stop timer, timer is = " + str(timer))
+    print("Stop timer, at the start timer is = " + str(startTimer))
+    print("Time gained to add is" + str(timeGained))
+    
+
+    
+    
+    
     if uid != 'XXX':
         # Get the current date in 'YYYY-MM-DD' format
         current_date = datetime.now().strftime('%Y-%m-%d')
@@ -307,8 +379,67 @@ def stop_timer():
         daily_points_ref.set({'points': timer}, merge=True)  # Merge is used to update existing points
         savedtime = timer
 
-    return "Timer stopped."
+        #if timer_status_check != False:
+
+
+        # Adding to total, Update the points for total        
+        FinalTotalTime = timerSum + timeGained
+        print("timerSum is" + str(timerSum))
+        print("FinalTotalTime is " + str(FinalTotalTime))
+        #FinalTotalTime = 12000
+        user_ref.set({'points': FinalTotalTime}, merge=True)
+
+        timerSum = FinalTotalTime
+
+
+        #print("startTimer (old) was" + str(startTimer))
+        #print("timer (new) was" + str(timer))
+        startTimer = timer
+        print("after equating, startTimer is now updated as new" + str(startTimer))
+        print("=========================================================")
+
+    timerStatus == False
+
+    return jsonify({'totalpoints':timerSum}), 200
     
+
+
+# Buy Process
+
+@app.route('/buyProcess')
+def buyProcess():
+    global uid
+    global timerSum
+    uid = request.args.get('uid')  # Get user_id from request
+    itemValue = request.args.get('itemValue')  # Get itemValue from request
+    itemName = request.args.get('itemName')
+
+    updatedtimerSum = timerSum - int(itemValue)
+    timerSum = updatedtimerSum
+    
+    print("Item name is " + itemName)
+
+    if uid != 'XXX':  
+        # Setting total points            
+        user_ref = db.collection('users').document(uid)
+        print("updated totalSum is " + str(timerSum))
+        user_ref.set({'points': timerSum}, merge=True)
+
+
+        # Adding planet status
+        doc = user_ref.get()
+        user_data = doc.to_dict()
+        planetArr = user_data.get('planet', ['Moon'])
+        print("Retrieved array is " + ', '.join(planetArr))
+        planetArr.append(itemName)
+        print("Set array 2 is " + ', '.join(planetArr))
+
+
+        user_ref.set({'planet': planetArr}, merge=True)
+     
+
+    return jsonify({'totalpoints':timerSum}), 200
+
 
 
 @app.route('/logout_timer')

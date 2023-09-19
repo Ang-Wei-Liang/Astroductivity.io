@@ -18,6 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
     if (userEmail) {
         //===============
 
+        const shopButtonContainer = document.getElementById("shop-button-container");
+        const shopButton = document.createElement("a");
+        shopButton.classList.add("nav-link");
+        shopButton.href = "/shop";
+        shopButton.textContent = "Shop   ";
+        shopButtonContainer.appendChild(shopButton);
+
         // Create and append the login button
         const loginButton = document.createElement("a");
         loginButton.classList.add("nav-link");
@@ -120,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         logoutButtonContainer.appendChild(logoutButton);
+
     } else {
         // Create and append the login button
         const loginButton = document.createElement("a");
@@ -176,11 +184,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         window.location.href = "/index";
                     } else {
                         alert("Incorrect email/password")
+
+                        $('#authModal').modal('hide');
+                        $('#authFailModal').modal('show');
+
                         console.error("Login failed:", data.error);
                     }
                 })
                 .catch(error => {
-                    alert("Unfortunately, an error occured")
+                    $('#authModal').modal('hide');
+                    $('#authFailModal').modal('show');
                     console.error("Login failed:", error);
                 });
         });
@@ -224,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.error("Signup failed:", error);
                 });
 
-                
+
             }
         });
 

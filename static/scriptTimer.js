@@ -11,7 +11,16 @@ const userEmail = sessionStorage.getItem("userEmail");
 const timerElement = document.getElementById("timer");
 const startButton = document.getElementById("start-button");
 const exitButton = document.getElementById("exit-button");
-    
+
+const totaltypebitsElement = document.getElementById("totaltypebitsValue");
+
+/*setTimeout(function() {
+    var typebitsValue = 100; // Replace with the actual value from your backend
+    // Update the content of the span element with the retrieved value
+    document.getElementById("typebitsValue").textContent = typebitsValue;
+}, 2000);*/
+
+
 function updateDateTime() {
     const datetimeDisplay = document.getElementById('datetime-display');
     const now = new Date();
@@ -51,6 +60,7 @@ function retrievePoints() {
           // Example: document.getElementById("points-display").textContent = data.points;
           //timerElement.innerText = `You currently have: ${data.points} typebits today, press start to begin`;
           timerElement.innerText = `${data.points}`;
+          totaltypebitsElement.innerText = `${data.totalpoints}`;
         } else {
           console.error("Error retrieving points:", data.error);
         }
@@ -116,9 +126,10 @@ if (startButton && exitButton) {
     exitButton.addEventListener("click", () => {
         //clearInterval(timerInterval);
         fetch("/stop_timer")
-            .then(response => response.text())
-            .then(() => {
-                // After starting, disable Start and enable Exit
+            .then(response => response.json())
+            .then((data) => {
+                // After starting, disable Start and enable Exit'
+                totaltypebitsElement.innerText = `${data.totalpoints}`;
                 toggleButtons(true, false);
             });
     });

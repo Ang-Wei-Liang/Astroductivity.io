@@ -1,4 +1,8 @@
 
+
+
+
+
 /*Timer Related Styling*/
 .custom-width-20 {
     width: 20%;
@@ -9,6 +13,15 @@
     color: rgba(242, 252, 253, 0.9)
 }
 
+.top-right-text {
+    position: absolute; /* Position the text element */
+    top: 80px; /* Adjust the top distance as needed */
+    right: 40px; /* Adjust the right distance as needed */
+    background-color: #fff; /* Background color for better readability */
+    padding: 5px 10px; /* Add some padding for better appearance */
+    border-radius: 10px; /* Add rounded corners */
+}
+
 /*Circular*/
 
 /* Custom CSS for circular card */
@@ -17,7 +30,7 @@
     height: 200px;
     border-radius: 50%;
     /*background-color: #f8f9fa;*/
-    background-image: url('../static/images/moon-Eugene.png'); /* Replace 'path/to/your/moon-image.jpg' with the actual path to your moon image */
+    background-image: url('../static/images/planets/moon-Eugene.png'); /* Replace 'path/to/your/moon-image.jpg' with the actual path to your moon image */
     background-size: cover;
     /* Set your background color */
     display: flex;
@@ -37,59 +50,7 @@
 /*Image by <a href="https://pixabay.com/users/vollex-1236651/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1898047">Eugene</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1898047">Pixabay</a>*/
 
 
-/*@keyframes glow {
-    0% {
-        box-shadow: 0 0 10px rgb(25, 48, 255);
-    }
 
-    10% {
-        box-shadow: 0 0 10px rgb(209, 255, 25);
-    }
-
-    20% {
-        box-shadow: 0 0 20px rgba(205, 249, 7, 0.9);
-    }
-
-    30% {
-        box-shadow: 0 0 10px rgb(209, 255, 25);
-    }
-
-    40% {
-        box-shadow: 0 0 10px rgb(23, 29, 26);
-    }
-
-    40% {
-        box-shadow: 0 0 10px rgb(23, 29, 26);
-    }
-
-    40% {
-        box-shadow: 0 0 10px rgb(23, 29, 26);
-    }
-
-    50% {
-        box-shadow: 0 0 10px rgb(23, 29, 26);
-    }
-
-    60% {
-        box-shadow: 0 0 10px rgb(23, 29, 26);
-    }
-
-    70% {
-        box-shadow: 0 0 10px rgb(23, 29, 26);
-    }
-
-    80% {
-        box-shadow: 0 0 10px rgb(23, 29, 26);
-    }
-
-    90% {
-        box-shadow: 0 0 10px rgb(23, 29, 26);
-    }
-
-    100% {
-        box-shadow: 0 0 10px rgb(23, 29, 26);
-    }
-}*/
 
 @keyframes glow {
     0% {
@@ -123,6 +84,7 @@
 
 
 /*Main Background*/
+/* Designed by Freepik */
 .bg {
     background: url(https://i.ibb.co/87GbbFP/2799006.jpg) no-repeat;
     background-size: cover;
