@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.message === "Signup successful") {
-                        window.location.href = "/login";
+                        window.location.href = "/index";
                     } else {
                         console.error("Signup failed:", data.error);
                     }
