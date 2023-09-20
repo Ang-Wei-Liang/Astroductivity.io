@@ -194,7 +194,7 @@ obtainPlanetArr()
 
 // Client-side SocketIO setup
 const currentURL = window.location.href;
-const socket = io.connect('http://127.0.0.1:5000/');
+const socket = io.connect('http://pythonguy101.pythonanywhere.com/');
 
 socket.on('timer_update', function(data) {
     console.log("Timer should be shown is " + data.timer);
