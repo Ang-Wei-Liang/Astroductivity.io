@@ -48,6 +48,8 @@ db = firestore.client()
 #========================
 
 app = Flask(__name__, static_url_path='/static')
+from flask_cors import CORS
+CORS(app, origins=["https://galaxy-type-kt7k4b4nu-ang-wei-liang.vercel.app"])
 
 socketio = SocketIO(app)
 
@@ -305,7 +307,7 @@ def retrieve_button_status():
 
 
 @app.route('/index')
-def index():
+def home():
     stop_timer()
     return render_template('index.html')
 
@@ -319,6 +321,10 @@ def login():
 def signup():
     return render_template('signup.html')
 """
+
+@app.route('/')
+def index():
+    return redirect(url_for('home'))
 
 @app.route('/statistics')
 def statistics():
@@ -568,4 +574,5 @@ def get_daily_stats10():
 
 
 if __name__ == "__main__":
-    app.run(debug=False,host='0.0.0.0', port=5000)
+    app.run(debug=True)
+    #app.run(debug=False,host='0.0.0.0', port=5000)

@@ -193,6 +193,7 @@ obtainPlanetArr()
 
 
 // Client-side SocketIO setup
+const currentURL = window.location.href;
 const socket = io.connect('http://127.0.0.1:5000/');
 
 socket.on('timer_update', function(data) {
