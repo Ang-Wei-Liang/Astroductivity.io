@@ -56,7 +56,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         document.getElementById('itemValue2').textContent = 'Your purchase has been successfully completed.';
                         $('#purchaseSuccessModal').modal('show');
 
+                        /*
+                        const audioBought = document.getElementById('triggerBought-audio');
+                        audioBought.src = '../../static/audio/WooHoo.mp3';
+                        //Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=73283">Pixabay</a>
+                        audioBought.play();
+                        */
 
+                        const audio = new Audio('../../static/audio/WooHoo.mp3');
+                        audio.play();
 
                     }
 

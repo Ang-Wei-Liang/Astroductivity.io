@@ -26,7 +26,7 @@ button {
 /* Style for the clickable SVG */
 .clickable-svg {
     position: absolute;
-    top: 65px;
+    top: 75px;
     /* Adjust the distance from the top as needed */
     right: 65px;
     /* Adjust the distance from the right as needed */
@@ -111,6 +111,8 @@ body {
     justify-content: center;
     align-items: center;
   }
+
+  
   
   .text-container h1{
     margin: 0;

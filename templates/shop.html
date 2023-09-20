@@ -44,10 +44,16 @@
     </div>
 </nav>
 
+<audio id="triggerBought-audio" autoplay>
+    <source src="../static/audio/ClickJingle.mp3" type="audio/mpeg"> 
+    <!--Sound Effect by <a href="https://pixabay.com/users/universfield-28281460/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=124467">UNIVERSFIELD</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=124467">Pixabay</a>--->
+    Your browser does not support the audio element.
+</audio> 
 
 
 <!-- Shop Section -->
-<div class="container mt-4">
+<div class="text-container-shop">
+<div class="container pt-4">
     <div class="mb-3 top-center-text">
         Total Typebits: <span id="totaltypebitsValue">Loading...</span>
     </div>
@@ -154,6 +160,7 @@
         <!--------------------------------------------------------------------->
 </div>     
 </div>
+</div>
 
 
 <!-- Modal -->
@@ -169,7 +176,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="confirmPurchaseButton">Confirm</button>
+                <button type="button" class="btn btn-primary clickSuccessPurchase" id="confirmPurchaseButton">Confirm</button>
             </div>
         </div>
     </div>
@@ -193,6 +200,25 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="showDeleteAccModalSvg" tabindex="-1" aria-labelledby="exampleDeleteAccModal"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleDeleteAccModal">Delete Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete your account?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteAccount">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
 

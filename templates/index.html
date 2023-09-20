@@ -5,7 +5,7 @@
     <title>Typing Timer</title>
     <!-- Add Bootstrap CSS from a CDN -->
     <link rel="stylesheet" href="../static/stylesBG.css">
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
@@ -30,6 +30,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
+                    <li class="nav-item" id="login-button-container2">
+                            <!-- Placeholder for the login button -->
+                    </li>
                         <a class="nav-link" href="/index">Timer</a>
                     </li>
                     <li class="nav-item" id="login-button-container">
@@ -81,12 +84,13 @@
     
 </audio>
 
-
+<!---
 <audio autoplay>
-    <source src="../static/audio/swoosh-sound-effect-for-fight-scenes-or-transitions-2-149890.mp3" type="audio/mpeg">
-    <!--- Sound Effect by <a href="https://pixabay.com/users/dheerajakam4jor-36410348/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=149890">Dheeraj M4JOR</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=149890">Pixabay</a>--->
-    Your browser does not support the audio element.
-</audio>
+    <source src="../static/audio/InterfaceJingle.mp3" type="audio/mpeg"> --->
+    <!--Sound Effect by <a href="https://pixabay.com/users/universfield-28281460/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=124464">UNIVERSFIELD</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=124464">Pixabay</a>--->
+    <!-- Your browser does not support the audio element.
+</audio> --->
+
 <!---
 <audio id="background-audio2" autoplay loop>
     <source src="../static/TULE - Fearless pt.II (feat. Chris Linton) [NCS Release].mp3" type="audio/mpeg">
@@ -100,7 +104,7 @@
 ---->
 
 <div class="top-right-text">
-    Total Typebits: <span id="totaltypebitsValue">Loading...</span>
+    Total Typebits: <span id="totaltypebitsValue">Login to Track</span>
 </div>
 
 
@@ -139,9 +143,9 @@
 
         <div class="container mt-2">
             <br>
-          
             <div class="row">
-                <div class="col-md-4 offset-md-4 text-center mt-2">
+                <!-- First Column: Music Select -->
+                <div class="col-md-6 text-center mt-2">
                     <label for="music-select" class="form-label timerTxt">Select Music:</label>
                     <select id="music-select" class="form-select text-center">
                         <option value="default">No Music</option>
@@ -152,12 +156,21 @@
                         <option value="../static/audio/Bedhead.mp3">Bedhead [Purrple Cat]</option>
                         <option value="../static/audio/Signs-of-Life.mp3">Signs of Life [Purrple Cat]</option>
                         <option value="../static/audio/KokoronashiSMSDM.mp3">Kokoronashi - Single [Sms DM]</option>
-                        <!-- Add more options for different music files as needed -->
+                    </select>
+                </div>
+        
+                <!-- Second Column: Planet Select -->
+                <div class="col-md-6 text-center mt-2">
+                    <label for="planet-select" class="form-label timerTxt">Select Planet:</label>
+                    <select id="planet-select" class="form-select text-center">
+                        <option value="default">Moon</option>
+                        
+                        <!-- Add more options for different planets as needed -->
                     </select>
                 </div>
             </div>
-            
         </div>
+        
         
 
     </div>

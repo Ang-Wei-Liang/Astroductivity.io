@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
+    const loginButtonContainer2 = document.getElementById("login-button-container2");
     const loginButtonContainer = document.getElementById("login-button-container");
     const signupButtonContainer = document.getElementById("signup-button-container");
     const logoutButtonContainer = document.getElementById("logout-button-container");
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
         loginButton.classList.add("nav-link");
         loginButton.href = "/home";
         loginButton.textContent = "Home";
-        loginButtonContainer.appendChild(loginButton);
+        loginButtonContainer2.appendChild(loginButton);
 
         /*
         // Create and append the sign-up button

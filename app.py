@@ -91,6 +91,7 @@ uid = 'XXX'
 
 timerSum = 0
 startTimer = 0
+currentlySelectedPlanet = "Moon"
 
 """
 @app.route('/deleteAcc', methods=['GET'])
@@ -177,6 +178,7 @@ def retrieve_points():
 
     global timer
     global timerSum
+    global currentlySelectedPlanet
 
     current_date = datetime.now().strftime('%Y-%m-%d')
 
@@ -184,8 +186,7 @@ def retrieve_points():
         # User document exists, check if dailyPoints subcollection exists
         print("main document exists")
 
-        daily_points_ref = user_ref.collection('dailyPoints')
-        
+        daily_points_ref = user_ref.collection('dailyPoints')      
         daily_doc = daily_points_ref.document(current_date).get()
 
 
@@ -197,6 +198,9 @@ def retrieve_points():
         timerSum = totalPoints
 
         print("Total points is (timerSum): " + str(timerSum))
+
+        # Getting Current Planet
+        currentlySelectedPlanet = user_data.get('selectedPlanet', 'Moon')
 
         if daily_doc.exists:
             
@@ -215,6 +219,7 @@ def retrieve_points():
             'points': 0,  # You can initialize points to any default value
             # Add other user data as needed
             'planet': ["Moon"],
+            'selectedPlanet': 'Moon'
         }
         user_ref.set(initial_data)
         
@@ -227,7 +232,11 @@ def retrieve_points():
         timer = 0
         timerSum = 0
 
-    return jsonify({'points': timer, 'totalpoints':timerSum}), 200
+    return jsonify({'points': timer, 'totalpoints':timerSum, 'selectedPlanet':currentlySelectedPlanet}), 200
+
+
+
+
 
 
 
@@ -235,7 +244,7 @@ def retrieve_points():
 @app.route('/retrieve_button_status', methods=['GET'])
 def retrieve_button_status():
     global uid
-    uid = request.args.get('uid')  # Get user_id from request
+    uid = request.args.get('uid')  # Get user_id from request currentlySelectedPlanet
 
     # Check if the user document exists
     user_ref = db.collection('users').document(uid)
@@ -258,6 +267,7 @@ def retrieve_button_status():
             'points': 0,  # You can initialize points to any default value
             # Add other user data as needed
             'planet': ['Moon'],
+            'selectedPlanet': 'Moon'
         }
         user_ref.set(initial_data)
 
@@ -363,11 +373,7 @@ def stop_timer():
     print("Stop timer, timer is = " + str(timer))
     print("Stop timer, at the start timer is = " + str(startTimer))
     print("Time gained to add is" + str(timeGained))
-    
-
-    
-    
-    
+       
     if uid != 'XXX':
         # Get the current date in 'YYYY-MM-DD' format
         current_date = datetime.now().strftime('%Y-%m-%d')
@@ -380,7 +386,6 @@ def stop_timer():
         savedtime = timer
 
         #if timer_status_check != False:
-
 
         # Adding to total, Update the points for total        
         FinalTotalTime = timerSum + timeGained
@@ -402,6 +407,26 @@ def stop_timer():
 
     return jsonify({'totalpoints':timerSum}), 200
     
+# Set current Planet
+
+
+@app.route('/set_currentlySelectedPlanet')
+def set_currentlySelectedPlanetr():
+    global uid
+    currentlySelectedPlanet = request.args.get('currentlySelectedPlanet')
+    if uid != 'XXX':
+        
+        
+        user_ref = db.collection('users').document(uid)
+  
+        
+        # Update the points for today's date
+        user_ref.set({'selectedPlanet': currentlySelectedPlanet}, merge=True)  # Merge is used to update existing points
+
+    return jsonify({'selectedPlanet': currentlySelectedPlanet}), 200
+
+
+
 
 
 # Buy Process

@@ -40,6 +40,95 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
+
+//Update planet selection dropdown
+function obtainPlanetArr(){
+    const planetSelect = document.getElementById('planet-select');
+
+    while (planetSelect.options.length > 1) {
+        planetSelect.remove(1);
+    }
+
+    uid = sessionStorage.getItem("uid");
+    fetch(`/retrieve_button_status?uid=${uid}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.planetArr !== undefined) {
+            planetArr = data.planetArr
+
+            addOptionToDropdown(planetSelect, 'Earth', 'Earth', planetArr);
+            addOptionToDropdown(planetSelect, 'Mercury', 'Mercury', planetArr);
+            addOptionToDropdown(planetSelect, 'Venus', 'Venus', planetArr);
+           
+          console.log(`User's planetArr Timer: ${data.planetArr}`);
+          
+
+        } else {
+          console.error("Error retrieving planetArr:", data.error);
+        }
+      })
+      .catch((error) => {
+        console.error("Error retrieving planetArr:", error);
+      });
+
+}
+
+function addOptionToDropdown(selectElement, value, text, planetArr) {
+    if (planetArr.includes(text)) {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = text;
+        selectElement.appendChild(option);
+    }
+}
+
+//Update actual planet picture
+
+// Get references to the select element and the circular-card element
+const planetSelect = document.getElementById('planet-select');
+const circularCard = document.querySelector('.circular-card');
+
+function planetImageMapObj(){
+    return {
+        Moon: '../static/images/planets/moon-Eugene.png',
+        Earth: '../static/images/planets/Earth.jpg',
+        Venus: '../static/images/planets/Venus.png',
+        Mercury: '../static/images/planets/Mercury.png',
+    };
+}
+
+// Add an event listener for the 'change' event on the select element
+planetSelect.addEventListener('change', function () {
+    // Get the selected planet's value
+    const selectedPlanet = planetSelect.value;
+
+    // Define an object to map planet values to image URLs
+    const planetImageMap = planetImageMapObj()
+
+    // Check if the selected planet is in the map
+    if (selectedPlanet in planetImageMap) {
+        // Set the background image based on the selected planet
+        
+
+        currentlySelectedPlanet = selectedPlanet
+
+        fetch(`/set_currentlySelectedPlanet?currentlySelectedPlanet=${currentlySelectedPlanet}`)
+            .then(response => response.json())
+            .then((data) => {
+                circularCard.style.backgroundImage = `url('${planetImageMap[data.selectedPlanet]}')`;                
+            });
+
+    } else {
+        // Set a default background image or clear it if no mapping is found
+        circularCard.style.backgroundImage = `url('${planetImageMap["Moon"]}')`;
+    }
+});
+
+
+
+
+
+
 // JavaScript code here===============================================================
 
 
@@ -60,7 +149,14 @@ function retrievePoints() {
           // Example: document.getElementById("points-display").textContent = data.points;
           //timerElement.innerText = `You currently have: ${data.points} typebits today, press start to begin`;
           timerElement.innerText = `${data.points}`;
+
           totaltypebitsElement.innerText = `${data.totalpoints}`;
+          const planetImageMap = planetImageMapObj()
+          if (data.selectedPlanet in planetImageMap) {
+            circularCard.style.backgroundImage = `url('${planetImageMap[data.selectedPlanet]}')`;
+          }
+
+          //totaltypebitsElement.innerText = `${data.totalpoints}`;
         } else {
           console.error("Error retrieving points:", data.error);
         }
@@ -74,6 +170,7 @@ function retrievePoints() {
 
 if (userEmail){
 retrievePoints()
+obtainPlanetArr()
 } else {
     timerElement.innerText = `Press Start` 
 }
@@ -129,7 +226,9 @@ if (startButton && exitButton) {
             .then(response => response.json())
             .then((data) => {
                 // After starting, disable Start and enable Exit'
+                if (userEmail){
                 totaltypebitsElement.innerText = `${data.totalpoints}`;
+                }
                 toggleButtons(true, false);
             });
     });
