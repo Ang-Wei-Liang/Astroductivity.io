@@ -21,7 +21,7 @@ Script.js
             fetch("/get_timer")
                 .then(response => response.text())
                 .then(timer => {
-                    timerElement.innerText = `Time passed: ${timer} typebits`;
+                    timerElement.innerText = `Time passed: ${timer} AstroCoins`;
                 });
         }
     
@@ -80,7 +80,7 @@ if (startButton && exitButton) {
             socket.send("start_timer"); // Send a message to start the timer
         };
         socket.onmessage = (event) => {
-            timerElement.innerText = `Time passed: ${event.data} typebits`; // Update the timer with the received data
+            timerElement.innerText = `Time passed: ${event.data} AstroCoins`; // Update the timer with the received data
         };
         timerInterval = setInterval(updateTimer, 975);
     });
@@ -90,7 +90,7 @@ if (startButton && exitButton) {
     });
 
     function updateTimer(timer) {
-        timerElement.innerText = `Time passed: ${timer} typebits`;
+        timerElement.innerText = `Time passed: ${timer} AstroCoins`;
     }
 }
 */

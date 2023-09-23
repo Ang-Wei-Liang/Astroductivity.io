@@ -1,9 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-
-    /*BUYING*/
-
+    //Part 4: The Buying
+    // Buy Button Part 1
     // Attach a click event listener to all Buy buttons with the .buy-button class
     const buyButtons = document.querySelectorAll('.buy-button');
 
@@ -17,15 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Buy Button Part 2a
     // Add a click event listener to the Confirm button to handle the purchase action (as shown in the previous example)
     document.getElementById('confirmPurchaseButton').addEventListener('click', function () {
-
-        // Handle the purchase action here
-        // Close the modal and update the UI as needed
-
-        //var totalPoints = retrievePoints();
-
-        /*Repeater*/
 
         uid = sessionStorage.getItem("uid");
         fetch(`/retrieve_points?uid=${uid}`)
@@ -35,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.log(`User's total points retrival: ${data.totalpoints}`);
                     // Update the UI to display the user's points
                     // Example: document.getElementById("points-display").textContent = data.points;
-                    //timerElement.innerText = `You currently have: ${data.points} typebits today, press start to begin`;
+                    //timerElement.innerText = `You currently have: ${data.points} AstroCoins today, press start to begin`;
 
                     console.log("Retrival for subtraction Completed, totalPoints is " + data.totalpoints)
 
@@ -45,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     if (totalPoints - itemValue < 0) {
                         $('#buyConfirmationModal').modal('hide');
-                        document.getElementById('itemValue2').textContent = 'You do not hae enough typebits.';
+                        document.getElementById('itemValue2').textContent = 'You do not hae enough AstroCoins.';
                         $('#purchaseSuccessModal').modal('show')
 
                     } else {
@@ -75,22 +68,15 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch((error) => {
                 console.error("Error retrieving points:", error);
             });
-
-
-
-        /*Repeater*/
-
-
     });
 
-
+    // Buy Button Part 2b
     function buyProcess(itemValue, itemName) {
 
         console.log("itemValue JS is " + itemValue + " and itemName JS is " + itemName)
 
         uid = sessionStorage.getItem("uid");
         var totalPoints
-
 
         fetch(`/buyProcess?uid=${uid}&itemValue=${itemValue}&itemName=${itemName}`)
             .then((response) => response.json())
@@ -99,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.log(`User's new points after buy: ${data.totalpoints}`);
 
 
-                    totaltypebitsElement.innerText = `${data.totalpoints}`;
+                    totalAstroCoinsElement.innerText = `${data.totalpoints}`;
 
                     totalPoints = data.totalpoints
 
@@ -119,33 +105,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     const userEmail = sessionStorage.getItem("userEmail");
-
-    /*window.addEventListener('scroll', function () {
-        const topCenterText = document.querySelector('.top-center-text');
-        const scrollY = window.scrollY;
-    
-        if (scrollY > 90) { // Adjust the threshold as needed
-            topCenterText.style.top = '0';
-        } else {
-            topCenterText.style.top = '-100px'; // Move the element off the screen
-        }
-    });*/
+    const totalAstroCoinsElement = document.getElementById("totalAstroCoinsValue");
 
 
-    const totaltypebitsElement = document.getElementById("totaltypebitsValue");
-
-
+    // Points Retrival
     function retrievePoints() {
 
         uid = sessionStorage.getItem("uid");
@@ -154,14 +118,10 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((data) => {
                 if (data.totalpoints !== undefined) {
                     console.log(`User's total points retrival: ${data.totalpoints}`);
-                    // Update the UI to display the user's points
-                    // Example: document.getElementById("points-display").textContent = data.points;
-                    //timerElement.innerText = `You currently have: ${data.points} typebits today, press start to begin`;
 
                     console.log("Retrival Completed, totalPoints is " + data.totalpoints)
-                    totaltypebitsElement.innerText = `${data.totalpoints}`;
-                    //var totalPoints = data.totalpoints
-                    //return totalPoints
+                    totalAstroCoinsElement.innerText = `${data.totalpoints}`;
+    
                 } else {
                     console.error("Error retrieving points:", data.error);
                 }
@@ -171,9 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-
     if (userEmail) {
-        //totalPoints = retrievePoints()
         retrievePoints()
         retrieveButtonStatus()
     } else {
@@ -184,7 +142,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const mercuryButton = document.getElementById('mercuryButton');
     const earthButton = document.getElementById('earthButton');
     const venusButton = document.getElementById('venusButton');
+    const jupiterButton = document.getElementById('jupiterButton');
+    const saturnButton = document.getElementById('saturnButton');
+    const uranusButton = document.getElementById('uranusButton');
+    const neptuneButton = document.getElementById('neptuneButton');
+    const plutoButton = document.getElementById('plutoButton');
+    const proximaButton = document.getElementById('proximaButton');
+    const cancrieButton = document.getElementById('cancrieButton');
+    const sunButton = document.getElementById('sunButton');
 
+
+
+    // Button Status Retrival
 
     function retrieveButtonStatus() {
         uid = sessionStorage.getItem("uid");
@@ -215,6 +184,46 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (planetArr.includes("Venus")) {
                         venusButton.classList.add('disabled');
                         document.getElementById('venusBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Jupiter")) {
+                        jupiterButton.classList.add('disabled');
+                        document.getElementById('jupiterBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Saturn")) {
+                        saturnButton.classList.add('disabled');
+                        document.getElementById('saturnBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Uranus")) {
+                        uranusButton.classList.add('disabled');
+                        document.getElementById('uranusBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Neptune")) {
+                        neptuneButton.classList.add('disabled');
+                        document.getElementById('neptuneBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Pluto")) {
+                        plutoButton.classList.add('disabled');
+                        document.getElementById('plutoBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Proxima")) {
+                        proximaButton.classList.add('disabled');
+                        document.getElementById('proximaBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Cancrie")) {
+                        cancrieButton.classList.add('disabled');
+                        document.getElementById('cancrieBuyStatus').textContent = "Owned"             
+                    }
+
+                    if (planetArr.includes("Sun")) {
+                        sunButton.classList.add('disabled');
+                        document.getElementById('sunBuyStatus').textContent = "Owned"             
                     }
                 } else {
                     console.error("Error retrieving planets:", data.error);

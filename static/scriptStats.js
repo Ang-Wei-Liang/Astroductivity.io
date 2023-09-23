@@ -1,5 +1,7 @@
 
 
+// Part 5: Statistics Retrival
+
 document.addEventListener("DOMContentLoaded", function () {
     // Get a reference to the canvas element
     var ctx = document.getElementById("line-chart").getContext("2d");
@@ -32,11 +34,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function createBarChart(ctx, previous_10_days, previous_10_days_points) {
 
-    // Define your data for the line chart (modify as needed)
+    
+//The chart
+
 var data = {
     labels: previous_10_days,
     datasets: [{
-        label: "Typebits Past 15 Days",
+        label: "AstroCoins Past 15 Days",
         data: previous_10_days_points, // Replace with your actual data
         fill: false, // Do not fill the area under the line
         borderColor: "rgba(75, 192, 192, 1)", // Line color
@@ -76,7 +80,7 @@ function retrievePoints() {
           console.log(`User's points: ${data.points}`);
           // Update the UI to display the user's points
           // Example: document.getElementById("points-display").textContent = data.points;
-          //timerElement.innerText = `You currently have: ${data.points} typebits today, press start to begin`;
+          //timerElement.innerText = `You currently have: ${data.points} AstroCoins today, press start to begin`;
           //timerElement.innerText = `${data.points}`;
         } else {
           console.error("Error retrieving points:", data.error);

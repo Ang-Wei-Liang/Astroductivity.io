@@ -1,23 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    //const socket = io.connect('http://127.0.0.1:5000/');
 
-    /*Here is for nav*/
-
-
-
-
+    //Part 1: The Nav Bar
     const loginButtonContainer2 = document.getElementById("login-button-container2");
     const loginButtonContainer = document.getElementById("login-button-container");
     const signupButtonContainer = document.getElementById("signup-button-container");
     const logoutButtonContainer = document.getElementById("logout-button-container");
 
-    // Check if an email is present in sessionStorage
+    // Check if an email is present in sessionStorage, different Navs for different login statuses
     const userEmail = sessionStorage.getItem("userEmail");
 
+    //Part 1.1: Logged In
     if (userEmail) {
-        //===============
 
+        // Shop Button
         const shopButtonContainer = document.getElementById("shop-button-container");
         const shopButton = document.createElement("a");
         shopButton.classList.add("nav-link");
@@ -25,46 +21,33 @@ document.addEventListener("DOMContentLoaded", function () {
         shopButton.textContent = "Shop   ";
         shopButtonContainer.appendChild(shopButton);
 
-        // Create and append the login button
+        // Stats Button
         const loginButton = document.createElement("a");
         loginButton.classList.add("nav-link");
         loginButton.href = "/statistics";
         loginButton.textContent = "Statistics";
         loginButtonContainer.appendChild(loginButton);
 
-        // Create and append the sign-up button
+        // Delete Button
         const signupButton = document.createElement("a");
         signupButton.classList.add("btn");
 
-
-        //signupButton.href = "/deleteAcc";
         signupButton.textContent = "Delete Account";
         signupButtonContainer.appendChild(signupButton);
 
         //const showDeleteAccModalSvg = document.getElementById("showDeleteAccModalSvg");
         //const modalDeleteAcc = new bootstrap.Modal(document.getElementById("exampleDeleteAccModal"));
 
+        // Show Delete Modal and Retrieve Endpoint
         signupButton.addEventListener("click", function () {
             // Handle logout logic here (e.g., clearing sessionStorage)
-
-            const modalDeleteAcc = new bootstrap.Modal(document.getElementById("showDeleteAccModalSvg"));
-
-
-            // JavaScript to trigger the modal
-            //------------------------------
-            
+            const modalDeleteAcc = new bootstrap.Modal(document.getElementById("showDeleteAccModalSvg")); 
             modalDeleteAcc.show();
-           
-
             const confirmDeleteAccountBtn = document.getElementById("confirmDeleteAccount");
-
             confirmDeleteAccountBtn.addEventListener("click", () => {
 
                 modalDeleteAcc.hide();
 
-                // Place your delete account action here
-
-        
                 fetch(`/deleteAcc?uid=${uid}`)
                 .then(response => response.text())
                 .then(() => {
@@ -72,28 +55,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     sessionStorage.clear();
                     alert("Account deleted!");
                     window.location.href = "/login";
-                });
-
-                
+                });            
             });
-
-            //------------------------------
-
-
-
-
-
-
-            
 
              
         });
 
-
-
-
-        //=========================
-
+        // Display User Login Email
 
         const emailDisplayContainer = document.getElementById("email-display-container");
         if (emailDisplayContainer) {
@@ -101,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             emailDisplayContainer.classList.add("ml-auto"); // Add ml-auto class for right alignment
         }
 
-        // Create and append the logout button
+        // Logout Button
         const logoutButton = document.createElement("button");
         //logoutButton.classList.add("btn", "btn-danger");
         logoutButton.classList.add("btn");
@@ -109,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
         logoutButton.textContent = "Logout";
         logoutButton.addEventListener("click", function () {
             // Handle logout logic here (e.g., clearing sessionStorage)
-
 
             sessionStorage.removeItem("userEmail");
             sessionStorage.clear();
@@ -121,15 +88,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     //toggleButtons(true, false);
                 });
 
-            //socket.close();
-            // Redirect the user to the login page or perform any other logout actions
-            window.location.href = "/home"; // Change this to your logout URL
+            window.location.href = "/home"; 
         });
 
         logoutButtonContainer.appendChild(logoutButton);
 
     } else {
-        // Create and append the login button
+        // Home Button
         const loginButton = document.createElement("a");
         loginButton.classList.add("nav-link");
         loginButton.href = "/home";
@@ -156,7 +121,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //------------------------------------------------------
 
-    /* Code for login.html */
+    //Part 2: The Authentication
+    // Login Button
     const loginButton = document.getElementById("loginbutton");
 
     if (loginButton) {
@@ -199,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Sign Up Button
     /* Code for signup.html */
     const signupButton = document.getElementById("signupbutton");
 
@@ -240,17 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
         });
-
-        
+  
     }
-
-    //--------------------------------------------------
-
-
-
-
-
-
-
 
 });

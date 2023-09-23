@@ -1,4 +1,7 @@
 
+
+//Part 3: Choosing the Music
+
 document.addEventListener("DOMContentLoaded", function () {
 // Get a reference to the <select> element
 const musicSelect = document.getElementById('music-select');

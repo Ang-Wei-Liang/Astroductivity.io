@@ -1,20 +1,14 @@
 
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
-import keyboard
 import time
 from threading import Thread
-from flask_sockets import Sockets
-
-from flask_socketio import SocketIO, emit
 from datetime import datetime, timedelta
-
-#========================
 import firebase_admin
 import os
 from firebase_admin import credentials, initialize_app
-
 from dotenv import load_dotenv
 
+# Load environment variables from .env file
 load_dotenv()
 
 # Create a dictionary with Firebase credentials
@@ -32,33 +26,51 @@ firebase_credentials = {
     "universe_domain": os.getenv("UNIVERSE_DOMAIN")
 }
 
-#cred = credentials.Certificate(firebase_credentials)
-
+# Initialize Firebase Admin SDK with credentials
 cred = credentials.Certificate(firebase_credentials)
-
-#There is an issue here
 firebase_admin.initialize_app(cred)
 
+# Import necessary Firebase modules
 from firebase_admin import auth
-#========================
-
-#========================
 from firebase_admin import firestore
-db = firestore.client()
-#========================
 
+# Initialize Firestore
+db = firestore.client()
+
+# Create a Flask app
 app = Flask(__name__, static_url_path='/static')
 
 
 
-socketio = SocketIO(app)
+# Define Routes 
+@app.route('/index')
+def index():
+    stop_timer()
+    return render_template('index.html')
 
 
+@app.route('/home')
+def home():
+    stop_timer()
+    return render_template('home.html')
+
+@app.route('/')
+def index2():
+    stop_timer()
+    return redirect(url_for('home'))
+
+@app.route('/statistics')
+def statistics():
+    stop_timer()
+    return render_template('statistics.html')
+
+@app.route('/shop')
+def shop():
+    stop_timer()
+    return render_template('shop.html')
 
 
-
-
-
+# Home Page
 
 # Define the signup route
 @app.route('/signupform', methods=['POST'])
@@ -101,13 +113,9 @@ def loginform():
             return jsonify({"error": error_message}), 401
 
 
-#================= Timer Page ===================================
-letter_keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-               'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+# Timer Page 
 
-
-
-#Define the retrival and saving of points
+# Define the retrival and saving of points
 
 timer_running = False
 timer = 0
@@ -116,33 +124,11 @@ uid = 'XXX'
 
 timerSum = 0
 startTimer = 0
+timerStatus = False
 currentlySelectedPlanet = "Moon"
 
-"""
-@app.route('/deleteAcc', methods=['GET'])
-def delete_Account():
-    global uid
-    uid = request.args.get('uid')  # Get user_id from request
-    user_ref = db.collection('users').document(uid)
-    doc = user_ref.get()
 
-    if doc.exists:
-        # Delete documents within the user's subcollection
-        subcollection_ref = user_ref.collection("dailyPoints")  # Replace "subcollection_name" with the actual subcollection name
-
-        for sub_doc in subcollection_ref.stream():
-            sub_doc.reference.delete()
-
-        # Delete the subcollection itself
-        db.collection("users").document(uid).collection("dailyPoints").delete()
-
-        # Optionally, delete the user document itself
-        user_ref.delete()
-
-        return "Account deleted successfully", 200
-    else:
-        return "User not found", 404
-"""
+# Define the delete route
 
 @app.route('/deleteAcc', methods=['GET'])
 def delete_Account():
@@ -153,35 +139,23 @@ def delete_Account():
         # Delete the user from Firebase Authentication
         auth.delete_user(uid)
 
-        #--------------------------------------
-
         user_ref = db.collection('users').document(uid)
         doc = user_ref.get()
 
         if doc.exists:
             print("A doc exists, deleting...")
-        # Delete documents within the user's subcollection
+
+            # Delete documents within the user's subcollection
             subcollection_ref = user_ref.collection("dailyPoints")  # Replace "subcollection_name" with the actual subcollection name
 
             for sub_doc in subcollection_ref.stream():
                sub_doc.reference.delete()
 
-            print("deletion phase 1")
-
-            # Delete the subcollection itself
-            #db.collection("users").document(uid).delete()
-            #.collection("dailyPoints")
-
-            print("deletion phase 2")
-
             # Optionally, delete the user document itself
             user_ref.delete()
 
-            print("deletion phase 3")
-
         else:
             print("No doc exists already!")
-
 
         return "Account deleted successfully", 200
     except auth.UserNotFoundError:
@@ -191,6 +165,7 @@ def delete_Account():
         print(str(e))
         return str(e), 500
 
+# Define the points retrival (logged in)
 
 @app.route('/retrieve_points', methods=['GET'])
 def retrieve_points():
@@ -260,11 +235,7 @@ def retrieve_points():
     return jsonify({'points': timer, 'totalpoints':timerSum, 'selectedPlanet':currentlySelectedPlanet}), 200
 
 
-
-
-
-
-
+# Define the planets array retrival (logged in, shop)
 
 @app.route('/retrieve_button_status', methods=['GET'])
 def retrieve_button_status():
@@ -301,83 +272,61 @@ def retrieve_button_status():
     return jsonify({'planetArr': planetArr}), 200
 
 
-
-
-
-
-
-@app.route('/index')
-def home():
-    stop_timer()
-    return render_template('index.html')
-
-
-@app.route('/home')
-def login():
-    return render_template('home.html')
-
-"""
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
-"""
-
-@app.route('/')
-def index():
-    return redirect(url_for('home'))
-
-@app.route('/statistics')
-def statistics():
-    stop_timer()
-    return render_template('statistics.html')
-
-@app.route('/shop')
-def shop():
-    stop_timer()
-    return render_template('shop.html')
-
-timerStatus = False
-# Start timer function (modify as needed)
+# Thread: Move the timer logic into a separate function
 def start_timer():
-    global timer_running, timer
-    global startTimer
-    global timerStatus 
+    global timer_running, timer, startTimer, timerStatus
+
     timerStatus = True
     startTimer = timer
+
+    print("Timer started")
+    #this is prev
     
-    print("timer started 2")
+    if timer_running:
+        #timer_running = True
+        print("Timer started")
 
-    socketio.emit('timer_update', {'timer': timer})
-
-    while timer_running:
-
-        """
-        timer += 1
-        print("timer number is " + str(timer))
-        socketio.emit('timer_update', {'timer': timer}, namespace='/index')
-        time.sleep(1)
-        """
-
-        if any(keyboard.is_pressed(key) for key in letter_keys):
+        print(timer_running)
+        while timer_running:
+            # Increment the timer every second
+            time.sleep(2)
             timer += 1
-            print("timer number is " + str(timer))
-            socketio.emit('timer_update', {'timer': timer})
-            time.sleep(0.975)
+            print(f"Timer number is {timer}")
 
+
+# Start Timer and Activate Thread
 
 @app.route('/start_timer')
 def start_timer_route():
     global timer_running, timer, savedtime
-    print("timer route started")
+    print("Timer route started")
     timer_running = True
-
-    #if timer != 0:
-    #timer = savedtime
 
     timer_thread = Thread(target=start_timer)
     timer_thread.start()
-    return "Timer started."
+    print("Start display timer = ========================" + str(timer))
+    return jsonify({'startTime': timer}), 200
 
+
+# Define the points retrival (not logged in)
+@app.route('/start_timer_noUID')
+def start_timer_route_noUID():
+    global timer
+    timer = 0
+    print("No uID start Timer retrieved")
+    return jsonify({'startTime': timer}), 200
+
+
+# Define the points retrival at intervals
+@app.route('/retrieving_timer_interval')
+def retrieving_timer_interval():
+    global timer
+    
+    print("No uID start Timer retrieved")
+    return jsonify({'startTime': timer}), 200
+
+
+# Stop Timer
 @app.route('/stop_timer')
 def stop_timer():
     global timer_running
@@ -389,8 +338,6 @@ def stop_timer():
     global timerSum
     global uid
     global timerStatus
-
-    #timer_status_check = True
 
     if timerStatus == False:
         timeGained = 0
@@ -425,19 +372,17 @@ def stop_timer():
 
         timerSum = FinalTotalTime
 
-
-        #print("startTimer (old) was" + str(startTimer))
-        #print("timer (new) was" + str(timer))
         startTimer = timer
         print("after equating, startTimer is now updated as new" + str(startTimer))
         print("=========================================================")
 
     timerStatus == False
 
-    return jsonify({'totalpoints':timerSum}), 200
+    return jsonify({'totalpoints':timerSum, 'endTime':timer}), 200
     
-# Set current Planet
 
+
+# Set current Planet
 
 @app.route('/set_currentlySelectedPlanet')
 def set_currentlySelectedPlanetr():
@@ -445,20 +390,15 @@ def set_currentlySelectedPlanetr():
     currentlySelectedPlanet = request.args.get('currentlySelectedPlanet')
     if uid != 'XXX':
         
-        
         user_ref = db.collection('users').document(uid)
-  
-        
-        # Update the points for today's date
+
         user_ref.set({'selectedPlanet': currentlySelectedPlanet}, merge=True)  # Merge is used to update existing points
 
     return jsonify({'selectedPlanet': currentlySelectedPlanet}), 200
 
 
 
-
-
-# Buy Process
+# Buy Process (shop)
 
 @app.route('/buyProcess')
 def buyProcess():
@@ -479,7 +419,6 @@ def buyProcess():
         print("updated totalSum is " + str(timerSum))
         user_ref.set({'points': timerSum}, merge=True)
 
-
         # Adding planet status
         doc = user_ref.get()
         user_data = doc.to_dict()
@@ -491,10 +430,22 @@ def buyProcess():
 
         user_ref.set({'planet': planetArr}, merge=True)
      
-
     return jsonify({'totalpoints':timerSum}), 200
 
 
+# Stop Timer (upon leaving)
+
+@app.route("/user_leaving", methods=["POST"])
+def user_leaving():
+    # Perform actions when the user is leaving (e.g., logging, cleanup)
+   
+    print("User is leaving the page.")
+    stop_timer()
+
+    return "OK", 200
+
+
+# Logout function
 
 @app.route('/logout_timer')
 def logout_timer():
@@ -507,9 +458,10 @@ def logout_timer():
     uid = 'XXX'
     timer_running = False
 
- 
     return "Logout Timer stopped."
 
+
+# Obtain Statistics
 
 @app.route('/get_daily_stats10', methods=['GET'])
 def get_daily_stats10():
@@ -522,7 +474,6 @@ def get_daily_stats10():
     # Check if the user document exists
     user_ref = db.collection('users').document(uid)
     doc = user_ref.get()
-
 
     if doc.exists:
         # User document exists, check if dailyPoints subcollection exists
@@ -555,9 +506,7 @@ def get_daily_stats10():
                 
                 previous_10_days.insert(0, formatted_date)
                 previous_10_days_points.insert(0, statsPoints)
-                
-             
-                
+                           
             else:
             # Points for the specified date don't exist, set points to 0
                 
@@ -570,10 +519,7 @@ def get_daily_stats10():
 
     return jsonify({"previous_10_days": previous_10_days, "previous_10_days_points": previous_10_days_points})
 
-
-
-
 if __name__ == "__main__":
-    app.run(debug=False,host='0.0.0.0')
-    #app.run(debug=True)
+    #app.run(debug=False,host='0.0.0.0')
+    app.run(debug=True)
     

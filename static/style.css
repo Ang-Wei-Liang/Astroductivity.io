@@ -11,7 +11,10 @@ h1 {
 
 #timer {
     font-size: 18px;
+    
 }
+
+
 
 button {
     padding: 10px 20px;
@@ -112,8 +115,6 @@ body {
     align-items: center;
   }
 
-  
-  
   .text-container h1{
     margin: 0;
     font-size: 150px;
@@ -131,9 +132,6 @@ body {
     -webkit-background-clip:text;
     background-clip: text;
     color: transparent; /* Make the text transparent to reveal the background */
-
-    
-   
 
     animation: animate2 15s ease-in-out infinite;
     text-align: center;

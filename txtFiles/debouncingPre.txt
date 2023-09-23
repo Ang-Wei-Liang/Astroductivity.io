@@ -1,0 +1,35 @@
+how would you incorporate debouncing here
+
+startButton.addEventListener("click", () => {
+        fetch("/start_timer")
+            .then(response => response.json())
+            .then((data) => {
+                // After starting, disable Start and enable Exit
+                toggleButtons(false, true);
+                timerElement.innerText = `${data.startTime}`;
+
+                // Start a timer to periodically update the UI
+                timerInterval = setInterval(() => {
+                    fetch("/start_timer_noUID") // Create a new Flask route to get the timer value
+                        .then(response => response.json())
+                        .then((data) => {
+                            timerElement.innerText = `${data.startTime}`;
+                        });
+                }, 5000); // Fetch timer value every 1 second
+              
+            });
+    });
+
+    exitButton.addEventListener("click", () => {
+        clearInterval(timerInterval);
+        fetch("/stop_timer")
+            .then(response => response.json())
+            .then((data) => {
+                // After starting, disable Start and enable Exit'
+                if (userEmail){
+                totalAstroCoinsElement.innerText = `${data.totalpoints}`;
+                }
+                toggleButtons(true, false);
+                timerElement.innerText = `${data.endTime}`;
+            });
+    });

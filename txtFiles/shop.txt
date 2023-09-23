@@ -10,7 +10,7 @@
                         <p class="card-text">The moon, Earth's celestial companion, is a captivating marvel of our night sky. What sets it apart is not just its hauntingly beautiful silver glow, but its profound influence on our planet. As the closest cosmic neighbor, the moon dictates the ebb and flow of our oceans, orchestrates the dance of tides, and provides a celestial canvas for dreamers and poets alike.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 0 Typebits</p>
+                        <p class="card-text">Price: 0 AstroCoins</p>
                         <a href="#" class="btn btn-secondary">Owned</a>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         <p class="card-text">Mercury, the scorched messenger of the Sun, is a world of extremes—its surface, blasted by relentless solar radiation, boasts the hottest days and the coldest nights in our solar system. Its fleeting dance around the Sun, the fastest of all planets, reveals a dynamic beauty amidst a harsh and unforgiving terrain.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 200 Typebits</p>
+                        <p class="card-text">Price: 200 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         <p class="card-text">Earth, our blue jewel in the cosmos, stands as the only known oasis of life in the vast expanse of the universe—a sanctuary where breathtaking landscapes and diverse ecosystems intertwine, nurturing the tapestry of existence.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">200 Typebits</p>
+                        <p class="card-text">200 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         <p class="card-text">Description of Product 4.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 500 Typebits</p>
+                        <p class="card-text">Price: 500 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         <p class="card-text">Description of Product 5.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 500 Typebits</p>
+                        <p class="card-text">Price: 500 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                         <p class="card-text">Description of Product 6.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 1000 Typebits</p>
+                        <p class="card-text">Price: 1000 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                         <p class="card-text">Description of Product 7.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 1000 Typebits</p>
+                        <p class="card-text">Price: 1000 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                         <p class="card-text">Description of Product 8.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 2000 Typebits</p>
+                        <p class="card-text">Price: 2000 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                         <p class="card-text">Description of Product 8.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 2000 Typebits</p>
+                        <p class="card-text">Price: 2000 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                         <p class="card-text">Description of Product 8.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 5000 Typebits</p>
+                        <p class="card-text">Price: 5000 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
                         <p class="card-text">Description of Product 8.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 10000 Typebits</p>
+                        <p class="card-text">Price: 10000 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                         <p class="card-text">Description of Product 8.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 20000 Typebits</p>
+                        <p class="card-text">Price: 20000 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                         <p class="card-text">Description of Product 8.</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text">Price: 50000 Typebits</p>
+                        <p class="card-text">Price: 50000 AstroCoins</p>
                         <a href="#" class="btn btn-primary">Buy</a>
                     </div>
                 </div>

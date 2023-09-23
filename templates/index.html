@@ -22,7 +22,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">Galaxy Type</a>
+            <a class="navbar-brand" href="#">Astroductivity</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -47,6 +47,8 @@
                     <li class="nav-item" id="shop-button-container">
                         <!-- Placeholder for the sign-up button -->
                     </li>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+     
                     <span class="navbar-text" id="email-display-container">
                         <!-- Content for the email display or logout button -->
                     </span>
@@ -66,7 +68,7 @@
                     
                 </div>
                 <h1>Welcome to Typing Timer</h1>
-                <p id="timer">Time passed: 0 typebits</p>
+                <p id="timer">Time passed: 0 AstroCoins</p>
                 <button id="start-button" class="btn btn-primary">Start</button>
                 <button id="exit-button" class="btn btn-danger">Exit</button>
             </div>
@@ -104,7 +106,7 @@
 ---->
 
 <div class="top-right-text">
-    Total Typebits: <span id="totaltypebitsValue">Login to Track</span>
+    Total AstroCoins: <span id="totalAstroCoinsValue">Login to Track</span>
 </div>
 
 
@@ -119,18 +121,11 @@
                 </div>
                 <!-- Circular card with the number -->
                 <div class="circular-card">
-                    <p class="circular-number" id="timer">Loading...</p> <!-- Replace with your dynamic typebits value -->
+                    <p class="circular-number" id="timer">Loading...</p> <!-- Replace with your dynamic AstroCoins value -->
                 </div>
                 <br>
-                <h2 class="mx-auto text-center timerTxt">Typebits Today</h2>
+                <h2 class="mx-auto text-center timerTxt">AstroCoins Earned Today</h2>
                 <br>
-
-                
-                
-                
-
-
-
 
                 <!-- Buttons at the bottom -->
                 <div class="text-center container mt-2">
@@ -163,7 +158,7 @@
                 <div class="col-md-6 text-center mt-2">
                     <label for="planet-select" class="form-label timerTxt">Select Planet:</label>
                     <select id="planet-select" class="form-select text-center">
-                        <option value="default">Moon</option>
+                        <option value="Moon">Moon</option>
                         
                         <!-- Add more options for different planets as needed -->
                     </select>
@@ -203,7 +198,7 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
     <!-- Your script.js file -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>---->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script src="{{ url_for('static', filename='scriptTimer.js') }}"></script>
     <script src="{{ url_for('static', filename='scriptMusic.js') }}"></script>

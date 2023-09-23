@@ -78,9 +78,14 @@
 .circular-number {
     font-size: 34px;
     font-weight: bold;
+    text-shadow: -0.5px -0.5px 0 white, 0.5px -0.5px 0 white, -0.5px 0.5px 0 white, 0.5px 0.5px 0 white; /* Thinner white outline */
 }
 
+/*
+#email-display-container {
 
+    margin-right: -40px; 
+}*/
 
 
 /*Main Background*/
